@@ -10,7 +10,7 @@
   margin: 10px;
   width: 30vw;
   height: 25vh;
-  background:black;
+  background: black;
   border: 2px solid gold;
 }
 .game_buttons {
@@ -22,7 +22,7 @@
   background: black;
   color: gold;
   border: 2px solid gold;
-  width: 2vw;
+  width: 4vw;
   height: 2vw;
   margin: 5px;
 }
@@ -47,20 +47,59 @@
   border-radius: 10px;
   font-size: 50px;
 }
-.text_title {
+.text_win {
   color: gold;
   margin-left: 60px;
   position: relative;
-  top: 17%;
+  top: 15%;
   font-size: 90px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-h1{
-  position:relative;
+.title_score{
+  position: relative;
   font-size: 70px;
   border-bottom: 4px solid black;
   display: flex;
   justify-content: center;
-  margin-left:35%;
-  margin-right:35%;
+  margin-left: 35%;
+  margin-right: 35%;
+}
+#option_value {
+  display: none;
+}
+.chooose_level_popUp{
+  /* position: absolute; */
+  /* height: 40vh; */
+
+  top: 30%;
+  left: 25%;
+  width: 50vw;
+  background: black;
+  position: fixed;
+  color: gold;
+  border: 5px solid gold;
+}
+.disapear{
+  display: none;
+}
+.inital_buttons{
+  display: flex;
+  justify-content:center;
+  position: relative;
+  top: 20%;
+  padding: 4%;
+}
+.inital_text{
+  position: relative;
+  top: 15%;
+}
+.inital_h1{
+  border-bottom: 2px solid gold;
+  font-size:40px;
+  font-family:'Courier New', Courier, monospace;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+.inital_h2{
+  font-family:'Courier New', Courier, monospace;
 }
