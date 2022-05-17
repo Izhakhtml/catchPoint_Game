@@ -1,0 +1,66 @@
+.App {
+  text-align: center;
+}
+.catchPoint {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.btn {
+  margin: 10px;
+  width: 30vw;
+  height: 25vh;
+  background:black;
+  border: 2px solid gold;
+}
+.game_buttons {
+  display: flex;
+  justify-content: center;
+}
+.start_game {
+  cursor: pointer;
+  background: black;
+  color: gold;
+  border: 2px solid gold;
+  width: 2vw;
+  height: 2vw;
+  margin: 5px;
+}
+.stop_game {
+  cursor: pointer;
+  background: black;
+  color: gold;
+  border: 2px solid gold;
+  width: 2vw;
+  height: 2vw;
+  margin: 5px;
+}
+.win_popUp {
+  width: 50vw;
+  height: 40vh;
+  position: absolute;
+  left: 25%;
+  top: 33%;
+  border: 5px solid gold;
+  background: rgb(12, 12, 12);
+  position: fixed;
+  border-radius: 10px;
+  font-size: 50px;
+}
+.text_title {
+  color: gold;
+  margin-left: 60px;
+  position: relative;
+  top: 17%;
+  font-size: 90px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+h1{
+  position:relative;
+  font-size: 70px;
+  border-bottom: 4px solid black;
+  display: flex;
+  justify-content: center;
+  margin-left:35%;
+  margin-right:35%;
+}
