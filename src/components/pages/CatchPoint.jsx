@@ -1,23 +1,25 @@
 import '../../App.css'
 import { useContext, useEffect, useRef, useState } from 'react';
 import { FaPause, FaPlay } from "react-icons/fa"
+import { IoMdArrowBack } from "react-icons/io"
+import { FiMenu } from "react-icons/fi"
 import { CatchBallContext } from '../../context/CatchBallContext';
-import ChooseTime from '../parts/ChooseTime';
 const CatchPoint = () => {
     const [arrayBtn, setArrayBtn] = useState([]);
     const [id, setId] = useState(0);
     const [count, setCount] = useState(0)
     const [disapear, setDisapear] = useState("")
-    const [bool, setBool] = useState(false);
-    const [btnStatus, setBtnStatus] = useState(false);
+    const [winPopup, setWinPopup] = useState("")
     const [currentLevel, setCurrentLevel] = useState(0);
-    const { setCounter, counter } = useContext(CatchBallContext)
+    const { setCounter, counter, showButtons, setShowButtons, changeButtons, setChangeButtons } = useContext(CatchBallContext)
     const BtnValue = useRef(null);
     const BtnGame = useRef(null);
     const SelectValue = useRef(null);
-
     useEffect(() => {
         setArrayBtn(BtnValue.current.children);
+        if (localStorage.getItem("currentTime") != undefined) {
+            setCurrentLevel(localStorage.getItem("currentTime"))
+        } 
     }, [])
     const StartGame = (e, time) => {
         let array = [];
@@ -49,7 +51,6 @@ const CatchPoint = () => {
     }
 
     const StopGame = (e) => {
-        // BtnGame.current.children[0].disabled = false;
         e.target.disabled = false //! try
         console.log(count);
         clearInterval(id)
@@ -63,47 +64,73 @@ const CatchPoint = () => {
         let styleText = { background: "red", borderRradius: "20px", padding: "8%", boxShadow: "0px 0px 20px 20px red" }
         const { background } = e.target.firstChild.style
         if (background == styleText.background) {
-            setCounter(parm => parm + 1);
-            console.log(e.target.disabled);
+            let currrentNum;
+            setCounter(parm => currrentNum = parm + 1);
+            localStorage.setItem("scoreNumber", currrentNum);
             e.target.disabled = true
         }
+        setWinPopup("")
+
     }
 
     const ChooseLevel = (event, time) => {
         StartGame(event, time)
         setDisapear("disapear")
-        setBool(true);
+        setShowButtons(true);
+        setChangeButtons(false)
         setCurrentLevel(time)
+        localStorage.setItem("currentTime", time);
+        setCounter(0)
+        localStorage.setItem("scoreNumber", 0);
     }
 
     const CheckTStatus = (event) => {
-        if (btnStatus == true) {
-            setBtnStatus(false)
+        if (changeButtons == true) {
+            setChangeButtons(false)
             StartGame(event, currentLevel)
-            console.log(btnStatus, "if");
         } else {
-            setBtnStatus(true)
+            setChangeButtons(true);
             StopGame(event)
-            console.log(btnStatus, "else");
         }
     }
-    console.log(btnStatus);
+
+    const RepeatToMenu = () => {
+        setDisapear("")
+        setWinPopup("winPopup")
+        setCounter(0)
+        setShowButtons(false); 
+        localStorage.setItem("scoreNumber", 0);
+    }
+    
+    const RepeatToSameLevel = (event) => {
+        setDisapear("disapear")
+        setChangeButtons(false)
+        setCounter(0)
+        StartGame(event, currentLevel)
+        setShowButtons(true);
+        localStorage.setItem("scoreNumber", 0);
+    }
+
     return (
         <div>
             <div className='game_buttons' ref={BtnGame}>
-                {bool ? <button className='stop_game' onClick={(e) => CheckTStatus(e)}>{btnStatus ? <FaPlay /> : <FaPause />}</button> : ""}
+                {showButtons ? <button className='stop_game' onClick={(e) => CheckTStatus(e)}>{changeButtons ? <FaPlay /> : <FaPause />}</button> : ""}
             </div>
-            <div className={disapear || "chooose_level_popUp"} ref={SelectValue}>
-                <article className='inital_text'>
-                    <h1 className='inital_h1'>Hello There;</h1>
-                    <h2 className='inital_h2'>please choose the level you want</h2>
-                </article>
-                <article className='inital_buttons'>
-                    <button className='start_game' onClick={(e) => ChooseLevel(e, 1000)}>Eazy</button>
-                    <button className='start_game' onClick={(e) => ChooseLevel(e, 700)}>Middle</button>
-                    <button className='start_game' onClick={(e) => ChooseLevel(e, 400)}>Hard</button>
-                </article>
-            </div>
+            {
+                counter <= 0 ?
+                    < div className={disapear || "chooose_level_popUp"} ref={SelectValue}>
+                        <article className='inital_text'>
+                            <h1 className='inital_h1'>Hello There;</h1>
+                            <h2 className='inital_h2'>please choose the level you want</h2>
+                        </article>
+                        <article className='inital_buttons'>
+                            <button className='start_game' onClick={(e) => ChooseLevel(e, 900)}>Eazy</button>
+                            <button className='start_game' onClick={(e) => ChooseLevel(e, 600)}>Middle</button>
+                            <button className='start_game' onClick={(e) => ChooseLevel(e, 400)}>Hard</button>
+                        </article>
+                    </div>
+                    : ""
+            }
             <div className='catchPoint' ref={BtnValue}>
                 <button className='btn' onClick={BtnText}><span></span></button>
                 <button className='btn' onClick={BtnText}><span></span></button>
@@ -115,8 +142,12 @@ const CatchPoint = () => {
                 <button className='btn' onClick={BtnText}><span></span></button>
                 <button className='btn' onClick={BtnText}><span></span></button>
             </div>
-            {counter == 5 ?<div className='win_popUp'><span className='text_win'>{clearInterval(id)}You are win congratulations</span></div>:""}
-        </div>
+            {
+                counter == 5 ?
+                    <div className={winPopup || 'win_popUp'}><span className='text_win'>{clearInterval(id)}You are win congratulations</span>
+                        <button className='option_buttons' onClick={RepeatToSameLevel}><IoMdArrowBack /></button><button className='option_buttons' onClick={RepeatToMenu}><FiMenu /></button></div> : ""
+            }
+        </div >
     )
 }
 export default CatchPoint;

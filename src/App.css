@@ -37,7 +37,7 @@
 }
 .win_popUp {
   width: 50vw;
-  height: 40vh;
+  height: 50vh;
   position: absolute;
   left: 25%;
   top: 33%;
@@ -68,9 +68,6 @@
   display: none;
 }
 .chooose_level_popUp{
-  /* position: absolute; */
-  /* height: 40vh; */
-
   top: 30%;
   left: 25%;
   width: 50vw;
@@ -102,4 +99,12 @@
 }
 .inital_h2{
   font-family:'Courier New', Courier, monospace;
+}
+.option_buttons{
+  color: gold;
+  background: transparent;
+  border: none;
+}
+.winPopup{
+  display: none;
 }
