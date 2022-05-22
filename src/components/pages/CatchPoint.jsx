@@ -7,19 +7,19 @@ import { CatchBallContext } from '../../context/CatchBallContext';
 const CatchPoint = () => {
     const [arrayBtn, setArrayBtn] = useState([]);
     const [id, setId] = useState(0);
-    const [count, setCount] = useState(0)
-    const [disapear, setDisapear] = useState("")
-    const [winPopup, setWinPopup] = useState("")
-    const [currentLevel, setCurrentLevel] = useState(0);
-    const { setCounter, counter, showButtons, setShowButtons, changeButtons, setChangeButtons } = useContext(CatchBallContext)
+    const [count, setCount] = useState(0);
+    // const [disapear, setDisapear] = useState("");
+    const [winPopup, setWinPopup] = useState("");
+    const [currentTime, setCurrentTime] = useState(0);
+    const { setCounter, counter, showButtons, setShowButtons, changeButtons, setChangeButtons, disapear, setDisapear, currentLevel, setCurrentLevel } = useContext(CatchBallContext);
     const BtnValue = useRef(null);
     const BtnGame = useRef(null);
     const SelectValue = useRef(null);
     useEffect(() => {
         setArrayBtn(BtnValue.current.children);
         if (localStorage.getItem("currentTime") != undefined) {
-            setCurrentLevel(localStorage.getItem("currentTime"))
-        } 
+            setCurrentTime(localStorage.getItem("currentTime"))
+        }
     }, [])
     const StartGame = (e, time) => {
         let array = [];
@@ -78,16 +78,17 @@ const CatchPoint = () => {
         setDisapear("disapear")
         setShowButtons(true);
         setChangeButtons(false)
-        setCurrentLevel(time)
+        setCurrentTime(time)
         localStorage.setItem("currentTime", time);
         setCounter(0)
         localStorage.setItem("scoreNumber", 0);
+        setCurrentLevel(event.target.innerText);
     }
 
     const CheckTStatus = (event) => {
         if (changeButtons == true) {
             setChangeButtons(false)
-            StartGame(event, currentLevel)
+            StartGame(event, currentTime)
         } else {
             setChangeButtons(true);
             StopGame(event)
@@ -98,15 +99,15 @@ const CatchPoint = () => {
         setDisapear("")
         setWinPopup("winPopup")
         setCounter(0)
-        setShowButtons(false); 
+        setShowButtons(false);
         localStorage.setItem("scoreNumber", 0);
     }
-    
+
     const RepeatToSameLevel = (event) => {
         setDisapear("disapear")
         setChangeButtons(false)
         setCounter(0)
-        StartGame(event, currentLevel)
+        StartGame(event, currentTime)
         setShowButtons(true);
         localStorage.setItem("scoreNumber", 0);
     }

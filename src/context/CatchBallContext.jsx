@@ -3,11 +3,13 @@ export const CatchBallContext = React.createContext();
 export const CatchBallProvider = ({ children }) => {
     const [counter, setCounter] = useState(0);
     const [showButtons, setShowButtons] = useState(false);
-    const [changeButtons, setChangeButtons] = useState(false)
+    const [changeButtons, setChangeButtons] = useState(false);
+    const [disapear, setDisapear] = useState("");
+    const [currentLevel, setCurrentLevel] = useState("");
     useEffect(() => {
         if (localStorage.getItem("scoreNumber") != undefined) {
 
-            if (localStorage.getItem("scoreNumber") != 0  ) {
+            if (localStorage.getItem("scoreNumber") != 0) {
                 let currentNum = Number(localStorage.getItem("scoreNumber"))
                 setShowButtons(true);
                 setChangeButtons(true);
@@ -21,7 +23,7 @@ export const CatchBallProvider = ({ children }) => {
         // localStorage.removeItem("scoreNumber")
     }, [])
     return (
-        <CatchBallContext.Provider value={{ counter, setCounter,showButtons, setShowButtons, changeButtons, setChangeButtons }}>
+        <CatchBallContext.Provider value={{ counter, setCounter, showButtons, setShowButtons, changeButtons, setChangeButtons, currentLevel, setCurrentLevel, disapear, setDisapear }}>
             {children}
         </CatchBallContext.Provider>
     )
