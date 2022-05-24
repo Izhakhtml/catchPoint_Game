@@ -6,12 +6,12 @@ import { FiMenu } from "react-icons/fi"
 import { CatchBallContext } from '../../context/CatchBallContext';
 const CatchPoint = () => {
     const [arrayBtn, setArrayBtn] = useState([]);
-    const [id, setId] = useState(0);
+    // const [id, setId] = useState(0);
     const [count, setCount] = useState(0);
     // const [disapear, setDisapear] = useState("");
     const [winPopup, setWinPopup] = useState("");
     const [currentTime, setCurrentTime] = useState(0);
-    const { setCounter, counter, showButtons, setShowButtons, changeButtons, setChangeButtons, disapear, setDisapear, currentLevel, setCurrentLevel } = useContext(CatchBallContext);
+    const { setCounter, counter, showButtons, setShowButtons, changeButtons, setChangeButtons, disapear, setDisapear, currentLevel, setCurrentLevel , id, setId} = useContext(CatchBallContext);
     const BtnValue = useRef(null);
     const BtnGame = useRef(null);
     const SelectValue = useRef(null);
@@ -82,7 +82,7 @@ const CatchPoint = () => {
         localStorage.setItem("currentTime", time);
         setCounter(0)
         localStorage.setItem("scoreNumber", 0);
-        setCurrentLevel(event.target.innerText);
+        setCurrentLevel(event.target.innerText)
     }
 
     const CheckTStatus = (event) => {
@@ -113,7 +113,7 @@ const CatchPoint = () => {
     }
 
     return (
-        <div>
+        <div className='warp_game'>
             <div className='game_buttons' ref={BtnGame}>
                 {showButtons ? <button className='stop_game' onClick={(e) => CheckTStatus(e)}>{changeButtons ? <FaPlay /> : <FaPause />}</button> : ""}
             </div>
@@ -145,8 +145,10 @@ const CatchPoint = () => {
             </div>
             {
                 counter == 5 ?
-                    <div className={winPopup || 'win_popUp'}><span className='text_win'>{clearInterval(id)}You are win congratulations</span>
-                        <button className='option_buttons' onClick={RepeatToSameLevel}><IoMdArrowBack /></button><button className='option_buttons' onClick={RepeatToMenu}><FiMenu /></button></div> : ""
+                    <div className={winPopup || 'win_popUp'}>
+                        <article className='text_win'>{clearInterval(id)}You are win congrats</article>
+                        <button className='option_buttons' onClick={RepeatToSameLevel}><IoMdArrowBack /></button><button className='option_buttons' onClick={RepeatToMenu}><FiMenu /></button>
+                    </div> : ""
             }
         </div >
     )

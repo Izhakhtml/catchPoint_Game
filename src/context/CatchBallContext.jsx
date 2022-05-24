@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 export const CatchBallContext = React.createContext();
 export const CatchBallProvider = ({ children }) => {
     const [counter, setCounter] = useState(0);
+    const [id, setId] = useState(0);
     const [showButtons, setShowButtons] = useState(false);
     const [changeButtons, setChangeButtons] = useState(false);
     const [disapear, setDisapear] = useState("");
@@ -23,7 +24,7 @@ export const CatchBallProvider = ({ children }) => {
         // localStorage.removeItem("scoreNumber")
     }, [])
     return (
-        <CatchBallContext.Provider value={{ counter, setCounter, showButtons, setShowButtons, changeButtons, setChangeButtons, currentLevel, setCurrentLevel, disapear, setDisapear }}>
+        <CatchBallContext.Provider value={{ counter, setCounter, showButtons, setShowButtons, changeButtons, setChangeButtons, currentLevel, setCurrentLevel, disapear, setDisapear, id, setId }}>
             {children}
         </CatchBallContext.Provider>
     )
