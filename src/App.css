@@ -138,7 +138,7 @@
   grid-area: main;
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (min-width: 320px) {
   .title_score {
     font-size: smaller;
   }
@@ -161,7 +161,7 @@
   
   .chooose_level_popUp {
     padding: 20px;
-    box-shadow: 0px -30px 40px 190px white;
+    box-shadow: 0px -20px 190px 200px white;
     left: 20%;
   }
 
@@ -197,10 +197,11 @@
   .win_popUp {
     left: 15%;
     padding: 25px;
+    top: 80px;
   }
 
   .text_win {
-    font-size: 45px;
+    font-size: 30px;
     margin-left: 0;
   }
 
@@ -213,6 +214,8 @@
     margin-top: 50%;
   }
 }
+
+
 @media only screen and (min-width: 375px) {
   .catchPoint {
     justify-content: space-around;
@@ -241,7 +244,8 @@
   }
 
   .chooose_level_popUp {
-    box-shadow: 0px -30px 40px 190px white;
+    box-shadow: 0px -20px 190px 200px white;
+    /* box-shadow: 0px -30px 40px 190px white; */
     padding: 30px;
     left: 15%;
   }
@@ -271,17 +275,17 @@
   }
   .win_popUp {
     left: 17%;
+    top: 70px;
     padding: 25px;
   }
   .text_win {
-    font-size:50px;
+    font-size:32px;
     margin-left: 0;
   }
   .option_buttons{
     margin-top: 50%;
   }
 } 
-
 @media only screen and (min-width: 425px) {
   .title_score {
     font-size: smaller;
@@ -306,7 +310,9 @@
   .chooose_level_popUp {
     padding: 30px;
     left: 17%;
-    box-shadow: 0px -30px 40px 180px white;
+    /* box-shadow: 0px -30px 40px 180px white; */
+    box-shadow: 0px -20px 190px 200px white;
+
   }
   .inital_h1 {
     font-size: larger;
@@ -340,10 +346,11 @@
   .win_popUp {
     left: 15%;
     padding: 35px;
+    top: 50px;
     width: 50vw;
   }
   .text_win {
-    font-size:60px;
+    font-size:33px;
     margin-left: 0;
   }
   .option_buttons{
@@ -367,16 +374,15 @@
     right: -2%;
   }
   .text_win {
-    /* font-size: 30px; */
     margin-left: 0;
-    font-size: 76.7px;
+    font-size: 40px;
   }
   .chooose_level_popUp {
     padding: 30px;
     left: 23%;
     /* box-shadow: 0px 0px 100px 230px white; */
-    box-shadow: -10px -30px 40px 190px white;
-
+    /* box-shadow: -10px -30px 40px 190px white; */
+    box-shadow: 0px -30px 190px 220px white;
   }
   .stop_game {
     width: 5%;
@@ -412,7 +418,7 @@
     padding: 30px;
     left: 23%;
     /* box-shadow: 0px -60px 100px 250px white; */
-    box-shadow: 0px  -30px 40px 190px white;
+    box-shadow: 0px  -30px 190px 220px white;
 
   }
   .stop_game {
