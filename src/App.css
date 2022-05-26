@@ -145,7 +145,7 @@
   grid-area: main;
 }
 
-@media only screen and (min-width: 320px) {
+@media only screen and (min-width: 300px) {
   .title_score {
     font-size: smaller;
   }
