@@ -6,9 +6,7 @@ import { FiMenu } from "react-icons/fi"
 import { CatchBallContext } from '../../context/CatchBallContext';
 const CatchPoint = () => {
     const [arrayBtn, setArrayBtn] = useState([]);
-    // const [id, setId] = useState(0);
     const [count, setCount] = useState(0);
-    // const [disapear, setDisapear] = useState("");
     const [winPopup, setWinPopup] = useState("");
     const [currentTime, setCurrentTime] = useState(0);
     const { setCounter, counter, showButtons, setShowButtons, changeButtons, setChangeButtons, disapear, setDisapear, setCurrentLevel , id, setId} = useContext(CatchBallContext);
@@ -118,7 +116,7 @@ const CatchPoint = () => {
                 {showButtons ? <button className='stop_game' onClick={(e) => CheckTStatus(e)}>{changeButtons ? <FaPlay /> : <FaPause />}</button> : ""}
             </div>
             {
-                counter <= 0 ?
+                counter <= 0 || counter === NaN?
                     < div className={disapear || "chooose_level_popUp"} ref={SelectValue}>
                         <article className='inital_text'>
                             <h1 className='inital_h1'>Hello There;</h1>

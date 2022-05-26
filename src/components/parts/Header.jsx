@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { CatchBallContext } from "../../context/CatchBallContext";
 import { FiMenu } from "react-icons/fi"
 const Header = () => {

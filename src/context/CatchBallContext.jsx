@@ -19,7 +19,6 @@ export const CatchBallProvider = ({ children }) => {
         } else {
             setCounter(Number(localStorage.setItem("scoreNumber", counter)));
         }
-        // localStorage.removeItem("scoreNumber")
     }, [])
     useEffect(() => {
         disapear == "" || counter >= 5 ?
