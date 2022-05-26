@@ -11,15 +11,14 @@ const CatchPoint = () => {
     // const [disapear, setDisapear] = useState("");
     const [winPopup, setWinPopup] = useState("");
     const [currentTime, setCurrentTime] = useState(0);
-    const { setCounter, counter, showButtons, setShowButtons, changeButtons, setChangeButtons, disapear, setDisapear, currentLevel, setCurrentLevel , id, setId} = useContext(CatchBallContext);
+    const { setCounter, counter, showButtons, setShowButtons, changeButtons, setChangeButtons, disapear, setDisapear, setCurrentLevel , id, setId} = useContext(CatchBallContext);
     const BtnValue = useRef(null);
     const BtnGame = useRef(null);
     const SelectValue = useRef(null);
     useEffect(() => {
         setArrayBtn(BtnValue.current.children);
-        if (localStorage.getItem("currentTime") != undefined) {
-            setCurrentTime(localStorage.getItem("currentTime"))
-        }
+        if (localStorage.getItem("currentTime") != undefined)setCurrentTime(localStorage.getItem("currentTime"));
+        if (localStorage.getItem("currentLevel") != undefined)setCurrentLevel(localStorage.getItem("currentLevel"));
     }, [])
     const StartGame = (e, time) => {
         let array = [];
@@ -83,6 +82,7 @@ const CatchPoint = () => {
         setCounter(0)
         localStorage.setItem("scoreNumber", 0);
         setCurrentLevel(event.target.innerText)
+        localStorage.setItem("currentLevel", event.target.innerText);
     }
 
     const CheckTStatus = (event) => {
