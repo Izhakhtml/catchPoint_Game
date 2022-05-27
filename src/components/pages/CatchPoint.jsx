@@ -1,15 +1,16 @@
 import '../../App.css'
 import { useContext, useEffect, useRef, useState } from 'react';
 import { FaPause, FaPlay } from "react-icons/fa"
-import { IoMdArrowBack } from "react-icons/io"
-import { FiMenu } from "react-icons/fi"
 import { CatchBallContext } from '../../context/CatchBallContext';
+import ButtonsGame from './ButtonsGame';
+import InitialPopUp from './InitialPopUp';
+import WinPopUp from './WinPopUp';
 const CatchPoint = () => {
     const [arrayBtn, setArrayBtn] = useState([]);
     const [count, setCount] = useState(0);
-    const [winPopup, setWinPopup] = useState("");
+    const [winText, setWinText] = useState("");
     const [currentTime, setCurrentTime] = useState(0);
-    const { setCounter, counter, showButtons, setShowButtons, changeButtons, setChangeButtons, disapear, setDisapear, setCurrentLevel , id, setId} = useContext(CatchBallContext);
+    const { setCounter, showButtons, setShowButtons, changeButtons, setChangeButtons, setDisapear, setCurrentLevel , id, setId} = useContext(CatchBallContext);
     const BtnValue = useRef(null);
     const BtnGame = useRef(null);
     const SelectValue = useRef(null);
@@ -66,7 +67,7 @@ const CatchPoint = () => {
             localStorage.setItem("scoreNumber", currrentNum);
             e.target.disabled = true
         }
-        setWinPopup("")
+        setWinText("")
 
     }
 
@@ -95,7 +96,7 @@ const CatchPoint = () => {
 
     const RepeatToMenu = () => {
         setDisapear("")
-        setWinPopup("winPopup")
+        setWinText("winPopup")
         setCounter(0)
         setShowButtons(false);
         localStorage.setItem("scoreNumber", 0);
@@ -115,39 +116,9 @@ const CatchPoint = () => {
             <div className='game_buttons' ref={BtnGame}>
                 {showButtons ? <button className='stop_game' onClick={(e) => CheckTStatus(e)}>{changeButtons ? <FaPlay /> : <FaPause />}</button> : ""}
             </div>
-            {
-                counter <= 0 || counter === NaN?
-                    < div className={disapear || "chooose_level_popUp"} ref={SelectValue}>
-                        <article className='inital_text'>
-                            <h1 className='inital_h1'>Hello There;</h1>
-                            <h2 className='inital_h2'>please choose the level you want</h2>
-                        </article>
-                        <article className='inital_buttons'>
-                            <button className='start_game' onClick={(e) => ChooseLevel(e, 900)}>Eazy</button>
-                            <button className='start_game' onClick={(e) => ChooseLevel(e, 600)}>Middle</button>
-                            <button className='start_game' onClick={(e) => ChooseLevel(e, 400)}>Hard</button>
-                        </article>
-                    </div>
-                    : ""
-            }
-            <div className='catchPoint' ref={BtnValue}>
-                <button className='btn' onClick={BtnText}><span></span></button>
-                <button className='btn' onClick={BtnText}><span></span></button>
-                <button className='btn' onClick={BtnText}><span></span></button>
-                <button className='btn' onClick={BtnText}><span></span></button>
-                <button className='btn' onClick={BtnText}><span></span></button>
-                <button className='btn' onClick={BtnText}><span></span></button>
-                <button className='btn' onClick={BtnText}><span></span></button>
-                <button className='btn' onClick={BtnText}><span></span></button>
-                <button className='btn' onClick={BtnText}><span></span></button>
-            </div>
-            {
-                counter == 5 ?
-                    <div className={winPopup || 'win_popUp'}>
-                        <article className='text_win'>{clearInterval(id)}You are win congrats</article>
-                        <button className='option_buttons' onClick={RepeatToSameLevel}><IoMdArrowBack /></button><button className='option_buttons' onClick={RepeatToMenu}><FiMenu /></button>
-                    </div> : ""
-            }
+            <InitialPopUp selectLevel={SelectValue} eazyLev={(e) => ChooseLevel(e, 900)} middleLev={(e) => ChooseLevel(e, 600)} hardLev={(e) => ChooseLevel(e, 400)}/>
+            <ButtonsGame refValue={BtnValue} btnText={BtnText}/>
+            <WinPopUp text={winText} sameLev={RepeatToSameLevel} menu={RepeatToMenu}/>
         </div >
     )
 }
