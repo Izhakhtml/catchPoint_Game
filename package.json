@@ -17,6 +17,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "setUp": "npm install && cd client && npm install && npm run start",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
